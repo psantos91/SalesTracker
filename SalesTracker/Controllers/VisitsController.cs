@@ -7,29 +7,26 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using SalesTracker.Data;
 using SalesTracker.Models;
-using SalesTracker.Services;
 
 namespace SalesTracker.Controllers
 {
-    public class SellersController : Controller
+    public class VisitsController : Controller
     {
         private readonly SalesTrackerContext _context;
-        private readonly SellerService _sellerService;
 
-        public SellersController(SalesTrackerContext context, SellerService sellerService)
+        public VisitsController(SalesTrackerContext context)
         {
             _context = context;
-            _sellerService = sellerService;
         }
 
-
-        // GET: Sellers
+        // GET: Visits
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Sellers.ToListAsync());
+            var salesTrackerContext = _context.Visits.Include(v => v.Client);
+            return View(await salesTrackerContext.ToListAsync());
         }
 
-        // GET: Sellers/Details/5
+        // GET: Visits/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -37,39 +34,42 @@ namespace SalesTracker.Controllers
                 return NotFound();
             }
 
-            var seller = await _context.Sellers
-                .FirstOrDefaultAsync(m => m.SellerId == id);
-            if (seller == null)
+            var visit = await _context.Visits
+                .Include(v => v.Client)
+                .FirstOrDefaultAsync(m => m.VisitId == id);
+            if (visit == null)
             {
                 return NotFound();
             }
 
-            return View(seller);
+            return View(visit);
         }
 
-        // GET: Sellers/Create
+        // GET: Visits/Create
         public IActionResult Create()
         {
+            ViewData["ClientId"] = new SelectList(_context.Clients, "ClientId", "ClientId");
             return View();
         }
 
-        // POST: Sellers/Create
+        // POST: Visits/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("SellerId,FirstName,LastName,Contact,Email,BirthDate,WorkingRegion,BaseSalary")] Seller seller)
+        public async Task<IActionResult> Create([Bind("VisitId,VisitDate,ClientId,Present,FollowUp,Observations")] Visit visit)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(seller);
+                _context.Add(visit);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(seller);
+            ViewData["ClientId"] = new SelectList(_context.Clients, "ClientId", "ClientId", visit.ClientId);
+            return View(visit);
         }
 
-        // GET: Sellers/Edit/5
+        // GET: Visits/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -77,22 +77,23 @@ namespace SalesTracker.Controllers
                 return NotFound();
             }
 
-            var seller = await _context.Sellers.FindAsync(id);
-            if (seller == null)
+            var visit = await _context.Visits.FindAsync(id);
+            if (visit == null)
             {
                 return NotFound();
             }
-            return View(seller);
+            ViewData["ClientId"] = new SelectList(_context.Clients, "ClientId", "ClientId", visit.ClientId);
+            return View(visit);
         }
 
-        // POST: Sellers/Edit/5
+        // POST: Visits/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("SellerId,FirstName,LastName,Contact,Email,BirthDate,WorkingRegion,BaseSalary")] Seller seller)
+        public async Task<IActionResult> Edit(int id, [Bind("VisitId,VisitDate,ClientId,Present,FollowUp,Observations")] Visit visit)
         {
-            if (id != seller.SellerId)
+            if (id != visit.VisitId)
             {
                 return NotFound();
             }
@@ -101,12 +102,12 @@ namespace SalesTracker.Controllers
             {
                 try
                 {
-                    _context.Update(seller);
+                    _context.Update(visit);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!SellerExists(seller.SellerId))
+                    if (!VisitExists(visit.VisitId))
                     {
                         return NotFound();
                     }
@@ -117,10 +118,11 @@ namespace SalesTracker.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(seller);
+            ViewData["ClientId"] = new SelectList(_context.Clients, "ClientId", "ClientId", visit.ClientId);
+            return View(visit);
         }
 
-        // GET: Sellers/Delete/5
+        // GET: Visits/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -128,37 +130,31 @@ namespace SalesTracker.Controllers
                 return NotFound();
             }
 
-            var seller = await _context.Sellers
-                .FirstOrDefaultAsync(m => m.SellerId == id);
-            if (seller == null)
+            var visit = await _context.Visits
+                .Include(v => v.Client)
+                .FirstOrDefaultAsync(m => m.VisitId == id);
+            if (visit == null)
             {
                 return NotFound();
             }
 
-            return View(seller);
+            return View(visit);
         }
 
-        // POST: Sellers/Delete/5
+        // POST: Visits/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var seller = await _context.Sellers.FindAsync(id);
-            _context.Sellers.Remove(seller);
+            var visit = await _context.Visits.FindAsync(id);
+            _context.Visits.Remove(visit);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool SellerExists(int id)
+        private bool VisitExists(int id)
         {
-            return _context.Sellers.Any(e => e.SellerId == id);
-        }
-
-        public async Task<IActionResult> SellerClients(int id)
-        {
-            var result = await _sellerService.ClientsFromSeller(id);
-
-            return View(result);
+            return _context.Visits.Any(e => e.VisitId == id);
         }
     }
 }

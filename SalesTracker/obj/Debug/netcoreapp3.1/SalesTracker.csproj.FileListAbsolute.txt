@@ -178,3 +178,9 @@ C:\Projects\SalesTracker\SalesTracker\obj\Debug\netcoreapp3.1\Razor\Views\Client
 C:\Projects\SalesTracker\SalesTracker\obj\Debug\netcoreapp3.1\Razor\Views\Clients\Details.cshtml.g.cs
 C:\Projects\SalesTracker\SalesTracker\obj\Debug\netcoreapp3.1\Razor\Views\Clients\Edit.cshtml.g.cs
 C:\Projects\SalesTracker\SalesTracker\obj\Debug\netcoreapp3.1\Razor\Views\Clients\Index.cshtml.g.cs
+C:\Projects\SalesTracker\SalesTracker\obj\Debug\netcoreapp3.1\Razor\Views\Sellers\SellerClients.cshtml.g.cs
+C:\Projects\SalesTracker\SalesTracker\obj\Debug\netcoreapp3.1\Razor\Views\Visits\Create.cshtml.g.cs
+C:\Projects\SalesTracker\SalesTracker\obj\Debug\netcoreapp3.1\Razor\Views\Visits\Delete.cshtml.g.cs
+C:\Projects\SalesTracker\SalesTracker\obj\Debug\netcoreapp3.1\Razor\Views\Visits\Details.cshtml.g.cs
+C:\Projects\SalesTracker\SalesTracker\obj\Debug\netcoreapp3.1\Razor\Views\Visits\Edit.cshtml.g.cs
+C:\Projects\SalesTracker\SalesTracker\obj\Debug\netcoreapp3.1\Razor\Views\Visits\Index.cshtml.g.cs

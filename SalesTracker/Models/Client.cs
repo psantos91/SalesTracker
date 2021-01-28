@@ -45,11 +45,13 @@ namespace SalesTracker.Models
         public int SellerId { get; set; }
         public Seller Seller { get; set; }
 
+        public ICollection<Visit> Visits { get; set; } = new List<Visit>();
+
 
         //CONSTRUCTORS
         public Client() { }
 
-        public Client(int clientId, string companyName, string firstName, string lastName, string farmAddress, string billingAddress, int contact, string email, int nif, string mainCrop, string secondaryCrop, float farmArea, bool hasBought, int rating, int sellerId, Seller seller)
+        public Client(int clientId, string companyName, string firstName, string lastName, string farmAddress, string billingAddress, int contact, string email, int nif, string mainCrop, string secondaryCrop, float farmArea, bool hasBought, int rating, int sellerId) //RETIREI SELLER SELLER
         {
             ClientId = clientId;
             CompanyName = companyName;
@@ -66,6 +68,17 @@ namespace SalesTracker.Models
             HasBought = hasBought;
             Rating = rating;
             SellerId = sellerId;
+        }
+
+        //METHODS
+        public void AddVisit(Visit vs)
+        {
+            Visits.Add(vs);
+        }
+
+        public void RemoveVisit(Visit vs)
+        {
+            Visits.Remove(vs);
         }
     }
 }

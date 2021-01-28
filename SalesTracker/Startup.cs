@@ -10,6 +10,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using SalesTracker.Data;
+using SalesTracker.Services;
 
 namespace SalesTracker
 {
@@ -29,6 +30,8 @@ namespace SalesTracker
 
             services.AddDbContext<SalesTrackerContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("SalesTrackerContext")));
+
+            services.AddScoped<SellerService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

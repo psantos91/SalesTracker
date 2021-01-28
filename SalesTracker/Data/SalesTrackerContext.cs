@@ -11,6 +11,7 @@ namespace SalesTracker.Data
     {
         public DbSet<Seller> Sellers { get; set; }
         public DbSet<Client> Clients { get; set; }
+        public DbSet<Visit> Visits { get; set; }
 
         public SalesTrackerContext(DbContextOptions<SalesTrackerContext> options)
             : base(options)
@@ -73,7 +74,7 @@ namespace SalesTracker.Data
                     FarmArea = 2.5,
                     HasBought = true,
                     Rating = 5,
-                    SellerId = 1,
+                    SellerId = 1
                 },
                 new Client
                 {
@@ -147,6 +148,54 @@ namespace SalesTracker.Data
                     Rating = 3,
                     SellerId = 3
                 });
+
+            modelBuilder.Entity<Visit>().HasData(
+                new Visit
+                {
+                    VisitId = 1,
+                    VisitDate = new DateTime(2020,12,30),
+                    ClientId = 1,
+                    Present = true,
+                    FollowUp = new DateTime(2021,02,15),
+                    Observations = "Apresentação de Calcário"
+                },
+                new Visit
+                {
+                    VisitId = 2,
+                    VisitDate = new DateTime(2020, 12, 10),
+                    ClientId = 2,
+                    Present = true,
+                    FollowUp = new DateTime(2021, 01, 31),
+                    Observations = "Apresentação de Produtos"
+                },
+                new Visit
+                {
+                    VisitId = 3,
+                    VisitDate = new DateTime(2020, 12, 30),
+                    ClientId = 3,
+                    Present = false,
+                    FollowUp = new DateTime(2021, 02, 01),
+                    Observations = ""
+                },
+                new Visit
+                {
+                    VisitId = 4,
+                    VisitDate = new DateTime(2020, 12, 29),
+                    ClientId = 1,
+                    Present = true,
+                    FollowUp = new DateTime(2021, 02, 10),
+                    Observations = "Apresentação de Fertilizantes"
+                },
+                new Visit
+                {
+                    VisitId = 5,
+                    VisitDate = new DateTime(2020, 12, 27),
+                    ClientId = 2,
+                    Present = true,
+                    FollowUp = new DateTime(2021, 02, 07),
+                    Observations = "Apresentação de Matéria Orgânica"
+                }
+                );
         }
     }
 }
