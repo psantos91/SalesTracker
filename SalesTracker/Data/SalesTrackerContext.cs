@@ -12,6 +12,7 @@ namespace SalesTracker.Data
         public DbSet<Seller> Sellers { get; set; }
         public DbSet<Client> Clients { get; set; }
         public DbSet<Visit> Visits { get; set; }
+        public DbSet<Product> Products { get; set; }
 
         public SalesTrackerContext(DbContextOptions<SalesTrackerContext> options)
             : base(options)
@@ -196,6 +197,88 @@ namespace SalesTracker.Data
                     Observations = "Apresentação de Matéria Orgânica"
                 }
                 );
+
+            modelBuilder.Entity<Product>().HasData(
+                new Product
+                {
+                    ProductId = 1,
+                    Name = "Calcario 25kg",
+                    Category = "Fertilizantes Sólidos",
+                    Price = 6.50,
+                    IVA = 6
+                },
+                new Product
+                {
+                    ProductId = 2,
+                    Name = "Calcario 500kg",
+                    Category = "Fertilizantes Sólidos",
+                    Price = 110.30,
+                    IVA = 6
+                },
+                new Product
+                {
+                    ProductId = 3,
+                    Name = "Materia Organica 25kg",
+                    Category = "Fertilizantes Sólidos",
+                    Price = 7.12,
+                    IVA = 6
+                },
+                new Product
+                {
+                    ProductId = 4,
+                    Name = "Materia Organica 500kg",
+                    Category = "Fertilizantes Sólidos",
+                    Price = 120.45,
+                    IVA = 6
+                },
+                new Product
+                {
+                    ProductId = 5,
+                    Name = "Adubo Fundo 25kg",
+                    Category = "Fertilizantes Sólidos",
+                    Price = 12.50,
+                    IVA = 6
+                },
+                new Product
+                {
+                    ProductId = 6,
+                    Name = "Adubo Fundo 500kg",
+                    Category = "Fertilizantes Sólidos",
+                    Price = 145.99,
+                    IVA = 6
+                },
+                new Product
+                {
+                    ProductId = 7,
+                    Name = "Azoto Foliar 1L",
+                    Category = "Fertilizantes Líquidos",
+                    Price = 4.50,
+                    IVA = 6
+                },
+                new Product
+                {
+                    ProductId = 8,
+                    Name = "Azoto Foliar 5L",
+                    Category = "Fertilizantes Líquidos",
+                    Price = 18.99,
+                    IVA = 6
+                },
+                new Product
+                {
+                    ProductId = 9,
+                    Name = "Algas 1Kg",
+                    Category = "Fertilizantes Líquidos",
+                    Price = 16.50,
+                    IVA = 6
+                },
+                new Product
+                {
+                    ProductId = 10,
+                    Name = "Algas 5kg",
+                    Category = "Fertilizantes Líquidos",
+                    Price = 40.59,
+                    IVA = 6
+                });
         }
     }
 }

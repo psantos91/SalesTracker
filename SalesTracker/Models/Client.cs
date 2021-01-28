@@ -58,7 +58,7 @@ namespace SalesTracker.Models
         public int SellerId { get; set; }
         public Seller Seller { get; set; }
 
-        public ICollection<Visit> Visits { get; set; } = new List<Visit>();
+        public ICollection<OrderProduct> { get; set; } = new List<OrderProduct>();
 
 
         //CONSTRUCTORS
