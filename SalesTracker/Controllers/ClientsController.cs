@@ -7,16 +7,19 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using SalesTracker.Data;
 using SalesTracker.Models;
+using SalesTracker.Services;
 
 namespace SalesTracker.Controllers
 {
     public class ClientsController : Controller
     {
         private readonly SalesTrackerContext _context;
+        private readonly ClientService _clientService;
 
-        public ClientsController(SalesTrackerContext context)
+        public ClientsController(SalesTrackerContext context, ClientService clientService)
         {
             _context = context;
+            _clientService = clientService;
         }
 
         // GET: Clients
@@ -153,6 +156,15 @@ namespace SalesTracker.Controllers
         private bool ClientExists(int id)
         {
             return _context.Clients.Any(e => e.ClientId == id);
+        }
+
+
+        //SEE ALL CLIENTS FROM ONE SELLER
+        public async Task<IActionResult> ClientVisits(int id)
+        {
+            var result = await _clientService.VisitsToClient(id);
+
+            return View(result);
         }
     }
 }

@@ -1,0 +1,55 @@
+﻿@model IEnumerable<SalesTracker.Models.Visit>
+
+@{
+    ViewData["Title"] = "Visitas";
+}
+
+<h1>Historial de Visitas</h1>
+
+<div class="panel panel-primary">
+    <div class="panel-body">
+        <table id="tableTesting" class="table table-striped table-hover">
+            <thead>
+                <tr class="success">
+                    <th>
+                        @Html.DisplayNameFor(model => model.VisitDate)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Client)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Present)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.FollowUp)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Observations)
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.VisitDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Client.ClientId)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Present)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FollowUp)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Observations)
+                    </td>
+                </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

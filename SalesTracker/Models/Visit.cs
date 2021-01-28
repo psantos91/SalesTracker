@@ -13,16 +13,24 @@ namespace SalesTracker.Models
         [Key]
         public int VisitId { get; set; }
 
+        [Display(Name = "Data Visita")]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
+        [DataType(DataType.Date)]
         public DateTime VisitDate { get; set; }
 
         [ForeignKey("Client")]
         public int ClientId { get; set; }
         public Client Client { get; set; }
 
+        [Display(Name = "Presente")]
         public bool Present { get; set; }
 
+        [Display(Name = "Data Follow Up")]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
+        [DataType(DataType.Date)]
         public DateTime FollowUp { get; set; }
 
+        [Display(Name = "Observações")]
         public string Observations { get; set; }
 
 

@@ -12,20 +12,28 @@ namespace SalesTracker.Models
         [Key]
         public int SellerId { get; set; }
 
+        [Display(Name = "Nome")]
         public string FirstName { get; set; }
 
+        [Display(Name = "Sobrenome")]
         public string LastName { get; set; }
 
-
+        [Display(Name = "Contacto")]
         public int Contact { get; set; }
 
         [EmailAddress]
+        [Display(Name = "Email")]
         public string Email { get; set; }
 
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
+        [DataType(DataType.Date)]
+        [Display(Name = "Data de Nascimento")]
         public DateTime BirthDate { get; set; }
 
+        [Display(Name = "Região")]
         public string WorkingRegion { get; set; }
 
+        [Display(Name = "Salário Base")]
         public float BaseSalary { get; set; }
 
         public ICollection<Client> Clients { get; set; } = new List<Client>();

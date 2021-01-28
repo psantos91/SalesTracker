@@ -184,3 +184,4 @@ C:\Projects\SalesTracker\SalesTracker\obj\Debug\netcoreapp3.1\Razor\Views\Visits
 C:\Projects\SalesTracker\SalesTracker\obj\Debug\netcoreapp3.1\Razor\Views\Visits\Details.cshtml.g.cs
 C:\Projects\SalesTracker\SalesTracker\obj\Debug\netcoreapp3.1\Razor\Views\Visits\Edit.cshtml.g.cs
 C:\Projects\SalesTracker\SalesTracker\obj\Debug\netcoreapp3.1\Razor\Views\Visits\Index.cshtml.g.cs
+C:\Projects\SalesTracker\SalesTracker\obj\Debug\netcoreapp3.1\Razor\Views\Clients\ClientVisits.cshtml.g.cs

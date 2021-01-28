@@ -154,6 +154,7 @@ namespace SalesTracker.Controllers
             return _context.Sellers.Any(e => e.SellerId == id);
         }
 
+        //SEE ALL CLIENTS FROM ONE SELLER
         public async Task<IActionResult> SellerClients(int id)
         {
             var result = await _sellerService.ClientsFromSeller(id);
